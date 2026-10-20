@@ -132,10 +132,10 @@ def _(D, DOF, N, inc, k, kmat, np, xy):
     for _i in range(len(inc)):
         _ki = kmat(inc[_i], xy, k[_i])
         _i0, _i1 = inc[_i]
-        _kblock[_i0, _i0] += _ki[0:2, 0:2]
-        _kblock[_i0, _i1] += _ki[0:2, 2:4]
-        _kblock[_i1, _i0] += _ki[2:4, 0:2]
-        _kblock[_i1, _i1] += _ki[2:4, 2:4]
+        _kblock[_i0, _i0] += _ki[:D, :D]
+        _kblock[_i0, _i1] += _ki[:D, D:]
+        _kblock[_i1, _i0] += _ki[D:, :D]
+        _kblock[_i1, _i1] += _ki[D:, D:]
     return (K,)
 
 
